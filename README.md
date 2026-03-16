@@ -1,4 +1,4 @@
-# IS2 - Data Warehouse Project
+End‑to‑End ETL OLTP Warehouse for Retail Sales & Customer Reviews 
 
 An end-to-end data warehousing project for an online article sales system.
 The pipeline covers everything from the operational database, through ETL into a star-schema warehouse, to analytical MDX queries.
