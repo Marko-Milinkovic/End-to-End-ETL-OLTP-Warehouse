@@ -1,0 +1,51 @@
+-- =========================================================
+-- MDX upiti za skladiste (Mondrian Schema Workbench)
+-- Schema: Skladiste
+-- Cubes: Prodaja, Recenzije
+-- =========================================================
+
+
+-- a) Iznos prodatih artikala za svaku kategoriju artikla, za svaku godinu
+
+SELECT
+  {[Measures].[Iznos prodaje]} ON COLUMNS,
+  NON EMPTY CrossJoin(
+    [Artikal].[Kategorija].Members,
+    [Vreme].[Godina].Members
+  ) ON ROWS
+FROM [Prodaja]
+
+
+-- b) Broj prodatih artikala za svako mesto prodavca
+
+SELECT
+  {[Measures].[Broj prodatih artikala]} ON COLUMNS,
+  NON EMPTY [Mesto prodavca].[Mesto prodavca].Members ON ROWS
+FROM [Prodaja]
+
+
+-- c) Broj ostavljenih recenzija za svaki mesec
+
+SELECT
+  {[Measures].[Broj recenzija]} ON COLUMNS,
+  NON EMPTY [Vreme].[Mesec].Members ON ROWS
+FROM [Recenzije]
+
+
+-- d) Prosecnu ocenu za svaku kategoriju, za svako mesto prodavca
+
+SELECT
+  {[Measures].[Prosecna ocena]} ON COLUMNS,
+  NON EMPTY CrossJoin(
+    [Artikal].[Kategorija].Members,
+    [Mesto prodavca].[Mesto prodavca].Members
+  ) ON ROWS
+FROM [Recenzije]
+
+
+-- e) Maksimalnu i minimalnu ocenu za svakog prodavca
+
+SELECT
+  {[Measures].[Minimalna ocena], [Measures].[Maksimalna ocena]} ON COLUMNS,
+  NON EMPTY [Prodavac].[Prodavac].Members ON ROWS
+FROM [Recenzije]

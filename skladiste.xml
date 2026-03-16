@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Schema name="Skladiste">
+
+<Cube name="Prodaja" visible="true" cache="true" enabled="true">
+<Table name="fact_sales"> </Table>
+
+<Dimension visible="true" foreignKey="TimeKey" highCardinality="false" name="Vreme">
+<Hierarchy visible="true" hasAll="true" allMemberName="Svo vreme" primaryKey="TimeKey">
+<Table name="dim_time"> </Table>
+<Level name="Godina" visible="true" column="YearNumber" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"> </Level>
+<Level name="Kvartal" visible="true" column="QuarterNumber" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"> </Level>
+<Level name="Mesec" visible="true" column="MonthNumber" nameColumn="MonthName" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"> </Level>
+<Level name="Dan" visible="true" column="DayNumber" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"> </Level>
+</Hierarchy>
+</Dimension>
+
+<Dimension visible="true" foreignKey="ArticleKey" highCardinality="false" name="Artikal">
+<Hierarchy visible="true" hasAll="true" allMemberName="Svi artikli" primaryKey="ArticleKey">
+<Table name="dim_article"> </Table>
+<Level name="Kategorija" visible="true" column="CategoryName" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"> </Level>
+<Level name="Artikal" visible="true" column="ArticleName" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"> </Level>
+</Hierarchy>
+</Dimension>
+
+<Dimension visible="true" foreignKey="GenderKey" highCardinality="false" name="Pol">
+<Hierarchy visible="true" hasAll="true" allMemberName="Svi polovi" primaryKey="GenderKey">
+<Table name="dim_gender"> </Table>
+<Level name="Pol" visible="true" column="GenderLabel" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"> </Level>
+</Hierarchy>
+</Dimension>
+
+<Dimension visible="true" foreignKey="AgeGroupKey" highCardinality="false" name="Uzrast">
+<Hierarchy visible="true" hasAll="true" allMemberName="Svi uzrasti" primaryKey="AgeGroupKey">
+<Table name="dim_age_group"> </Table>
+<Level name="Uzrast" visible="true" column="AgeGroupLabel" ordinalColumn="SortOrder" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"> </Level>
+</Hierarchy>
+</Dimension>
+
+<Dimension visible="true" foreignKey="BuyerPlaceKey" highCardinality="false" name="Mesto kupca">
+<Hierarchy visible="true" hasAll="true" allMemberName="Sva mesta kupaca" primaryKey="PlaceKey">
+<Table name="dim_place"> </Table>
+<Level name="Mesto kupca" visible="true" column="PlaceName" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"> </Level>
+</Hierarchy>
+</Dimension>
+
+<Dimension visible="true" foreignKey="SellerPlaceKey" highCardinality="false" name="Mesto prodavca">
+<Hierarchy visible="true" hasAll="true" allMemberName="Sva mesta prodavaca" primaryKey="PlaceKey">
+<Table name="dim_place"> </Table>
+<Level name="Mesto prodavca" visible="true" column="PlaceName" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"> </Level>
+</Hierarchy>
+</Dimension>
+
+<Measure name="Broj prodatih artikala" column="QuantitySold" formatString="#,##0" aggregator="sum"> </Measure>
+<Measure name="Iznos prodaje" column="SalesAmount" formatString="#,##0.00" aggregator="sum"> </Measure>
+</Cube>
+
+<Cube name="Recenzije" visible="true" cache="true" enabled="true">
+<Table name="fact_reviews"> </Table>
+
+<Dimension visible="true" foreignKey="TimeKey" highCardinality="false" name="Vreme">
+<Hierarchy visible="true" hasAll="true" allMemberName="Svo vreme" primaryKey="TimeKey">
+<Table name="dim_time"> </Table>
+<Level name="Godina" visible="true" column="YearNumber" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"> </Level>
+<Level name="Kvartal" visible="true" column="QuarterNumber" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"> </Level>
+<Level name="Mesec" visible="true" column="MonthNumber" nameColumn="MonthName" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"> </Level>
+<Level name="Dan" visible="true" column="DayNumber" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"> </Level>
+</Hierarchy>
+</Dimension>
+
+<Dimension visible="true" foreignKey="ArticleKey" highCardinality="false" name="Artikal">
+<Hierarchy visible="true" hasAll="true" allMemberName="Svi artikli" primaryKey="ArticleKey">
+<Table name="dim_article"> </Table>
+<Level name="Kategorija" visible="true" column="CategoryName" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"> </Level>
+<Level name="Artikal" visible="true" column="ArticleName" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"> </Level>
+</Hierarchy>
+</Dimension>
+
+<Dimension visible="true" foreignKey="SellerKey" highCardinality="false" name="Prodavac">
+<Hierarchy visible="true" hasAll="true" allMemberName="Svi prodavci" primaryKey="SellerKey">
+<Table name="dim_seller"> </Table>
+<Level name="Prodavac" visible="true" column="SellerFullName" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"> </Level>
+</Hierarchy>
+</Dimension>
+
+<Dimension visible="true" foreignKey="GenderKey" highCardinality="false" name="Pol">
+<Hierarchy visible="true" hasAll="true" allMemberName="Svi polovi" primaryKey="GenderKey">
+<Table name="dim_gender"> </Table>
+<Level name="Pol" visible="true" column="GenderLabel" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"> </Level>
+</Hierarchy>
+</Dimension>
+
+<Dimension visible="true" foreignKey="AgeGroupKey" highCardinality="false" name="Uzrast">
+<Hierarchy visible="true" hasAll="true" allMemberName="Svi uzrasti" primaryKey="AgeGroupKey">
+<Table name="dim_age_group"> </Table>
+<Level name="Uzrast" visible="true" column="AgeGroupLabel" ordinalColumn="SortOrder" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"> </Level>
+</Hierarchy>
+</Dimension>
+
+<Dimension visible="true" foreignKey="BuyerPlaceKey" highCardinality="false" name="Mesto kupca">
+<Hierarchy visible="true" hasAll="true" allMemberName="Sva mesta kupaca" primaryKey="PlaceKey">
+<Table name="dim_place"> </Table>
+<Level name="Mesto kupca" visible="true" column="PlaceName" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"> </Level>
+</Hierarchy>
+</Dimension>
+
+<Dimension visible="true" foreignKey="SellerPlaceKey" highCardinality="false" name="Mesto prodavca">
+<Hierarchy visible="true" hasAll="true" allMemberName="Sva mesta prodavaca" primaryKey="PlaceKey">
+<Table name="dim_place"> </Table>
+<Level name="Mesto prodavca" visible="true" column="PlaceName" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"> </Level>
+</Hierarchy>
+</Dimension>
+
+<Measure name="Broj recenzija" column="ReviewCount" formatString="#,##0" aggregator="sum"> </Measure>
+<Measure name="Prosecna ocena" column="Rating" formatString="#,##0.00" aggregator="avg"> </Measure>
+<Measure name="Minimalna ocena" column="MinRating" formatString="#,##0.00" aggregator="min"> </Measure>
+<Measure name="Maksimalna ocena" column="MaxRating" formatString="#,##0.00" aggregator="max"> </Measure>
+</Cube>
+
+</Schema>
