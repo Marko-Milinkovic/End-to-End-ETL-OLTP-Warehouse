@@ -114,28 +114,28 @@ The `ETL_CONTROL` table tracks the last successful load timestamp for each proce
 All transformations are built in **Pentaho Data Integration (Kettle)** and follow the same conceptual pattern:
 
 ```
-┌─────────────────┐
+┌───────────────── ┐
 │  Read ETL_CONTROL│  ← Get LastSuccessfulLoad for this process
 │  (get_last_load) │     NULL on first run = total load
-└────────┬────────┘
+└────────┬──────── ┘
          │ passes timestamp
          ▼
-┌─────────────────┐
+┌───────────────── ┐
 │  Extract from    │  ← SQL with WHERE CreatedAt > ?
 │  OLTP            │     First run: all rows; later: only new rows
-└────────┬────────┘
+└────────┬──────── ┘
          │ source rows
          ▼
-┌─────────────────┐
+┌───────────────── ┐
 │  Load into       │  ← Insert new rows into warehouse
 │  Warehouse       │     (lookup/filter or insert-update)
-└────────┬────────┘
+└────────┬──────── ┘
          │
          ▼
-┌─────────────────┐
+┌───────────────── ┐
 │  Update          │  ← Mark ETL_CONTROL as SUCCESS
 │  ETL_CONTROL     │     with current timestamp
-└─────────────────┘
+└───────────────── ┘
 ```
 
 ### Dimension Transformations
@@ -254,26 +254,26 @@ The second run processes only the delta (new places, new sellers, new articles, 
 The Mondrian schema definition connects the warehouse tables to an OLAP logical model. It maps the physical star schema to cubes that MDX queries can be executed against.
 
 ```
-┌─────────────────────────────────┐
-│        skladiste.xml            │
-│                                 │
-│  Cube: Prodaja (FACT_SALES)     │
-│    ├── Vreme      → dim_time    │
-│    ├── Artikal    → dim_article │
-│    ├── Pol        → dim_gender  │
+┌───────────────────────────────── ┐
+│        skladiste.xml             │
+│                                  │
+│  Cube: Prodaja (FACT_SALES)      │
+│    ├── Vreme      → dim_time     │
+│    ├── Artikal    → dim_article  │
+│    ├── Pol        → dim_gender   │
 │    ├── Uzrast     → dim_age_group│
-│    ├── Mesto kupca → dim_place  │
+│    ├── Mesto kupca → dim_place   │
 │    └── Mesto prodavca → dim_place│
-│                                 │
-│  Cube: Recenzije (FACT_REVIEWS) │
-│    ├── Vreme      → dim_time    │
-│    ├── Artikal    → dim_article │
-│    ├── Prodavac   → dim_seller  │
-│    ├── Pol        → dim_gender  │
+│                                  │
+│  Cube: Recenzije (FACT_REVIEWS)  │
+│    ├── Vreme      → dim_time     │
+│    ├── Artikal    → dim_article  │
+│    ├── Prodavac   → dim_seller   │
+│    ├── Pol        → dim_gender   │
 │    ├── Uzrast     → dim_age_group│
-│    ├── Mesto kupca → dim_place  │
+│    ├── Mesto kupca → dim_place   │
 │    └── Mesto prodavca → dim_place│
-└─────────────────────────────────┘
+└───────────────────────────────── ┘
 ```
 
 `DIM_PLACE` is a **role-playing dimension** -- the same physical table appears as both "Mesto kupca" (buyer place) and "Mesto prodavca" (seller place), each linked through a different foreign key.
