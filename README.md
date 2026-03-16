@@ -12,7 +12,7 @@ The pipeline covers everything from the operational database, through ETL into a
 ├── 2_script_for_mockdata_insertion.sql    Initial OLTP data (10+ rows per table)
 ├── 3_script_for_warehouse_creation.sql    Warehouse star schema
 ├── 4_script_for_additional_mockdata.sql   Extra data for incremental load testing
-├── punjenje/                              ETL folder (Kettle files)
+├── loading/                              ETL folder (Kettle files)
 │   ├── load_dim_time.ktr
 │   ├── load_dim_place.ktr
 │   ├── load_dim_seller.ktr
@@ -20,8 +20,8 @@ The pipeline covers everything from the operational database, through ETL into a
 │   ├── load_fact_sales.ktr
 │   ├── load_fact_reviews.ktr
 │   └── global_loading_job.kjb
-├── skladiste.xml                          Mondrian schema definition
-├── upiti-mdx.txt                          MDX analytical queries
+├── warehouse.xml                          Mondrian schema definition
+├── querries-mdx.txt                          MDX analytical queries
 └── README.md
 ```
 
